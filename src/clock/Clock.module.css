@@ -1,0 +1,55 @@
+.main {
+  height: 100vh;
+  display: flex;
+
+  background-image: url("../assets/desktop/bg-image-daytime.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.timeRow {
+  margin-top: auto;
+}
+
+.timeScreen {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  padding-left: 8rem;
+  padding-bottom: 4rem;
+}
+
+.currentTime {
+  color: white;
+}
+
+/* 200 > 40 > 24 > 20 */
+
+.timeValue {
+  font-weight: bold;
+  font-size: clamp(100%, 200px, 5rem + 2vw);
+  letter-spacing: -5px;
+}
+
+.location {
+  margin: 0;
+
+  font-weight: bold;
+  font-size: 24px;
+  letter-spacing: 4.8px;
+  text-transform: uppercase;
+}
+
+.timeZone {
+  font-size: 40px;
+  font-weight: 300;
+}
+
+.greeting {
+  margin: 0;
+
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 20px;
+}
