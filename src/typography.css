@@ -1,0 +1,7 @@
+.fluidFontSize {
+  font-size: clamp(
+    var(--font-size-min),
+    var(--font-size-max),
+    var(--font-size-in-between) + var(--viewport-delta, 2vw)
+  );
+}

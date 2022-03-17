@@ -1,0 +1,21 @@
+.main {
+  height: 100vh;
+  display: flex;
+
+  background-image: url("../assets/desktop/bg-image-daytime.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.timeRow {
+  margin-top: auto;
+}
+
+.timeScreen {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  padding-left: 8vw;
+  padding-bottom: 4vw;
+}
