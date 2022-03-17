@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const FlexRow = ({children, className}: Props) => {
-  const containerClassName = classNames(styles.flexRow, className);
+  const containerClassName = classNames(styles.row, className);
 
   return (
     <div className={containerClassName}>

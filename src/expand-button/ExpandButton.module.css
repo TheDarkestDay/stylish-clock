@@ -1,0 +1,41 @@
+.expandButton {
+  display: flex;
+  align-items: center;
+  padding: 9px 15px;
+
+  background-color: #ffffff;
+
+  border-radius: 28px;
+}
+
+.expandButton::after {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin-left: 14px;
+
+  border-radius: 100%;
+  background-color: #303030;
+  background-image: url('../assets/desktop/icon-arrow-down.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  transform: rotate(0deg);
+  transition: transform 0.2s;
+
+  content: "";
+}
+
+.expandButtonExpanded::after {
+  transform: rotate(180deg);
+}
+
+.buttonCaption {
+  line-height: 28px;
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+
+  opacity: 0.5;
+}

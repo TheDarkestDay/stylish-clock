@@ -17,5 +17,11 @@
   flex-grow: 1;
 
   padding-left: 8vw;
+  padding-right: 8vw;
   padding-bottom: 4vw;
+}
+
+.expandButton {
+  margin-left: auto;
+  align-self: flex-end;
 }
