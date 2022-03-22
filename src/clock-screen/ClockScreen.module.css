@@ -2,9 +2,9 @@
   height: 100vh;
   display: flex;
 
-  background-image: url("../assets/desktop/bg-image-daytime.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../assets/desktop/bg-image-daytime.jpg");
+  background-repeat: no-repeat, no-repeat;
+  background-size: cover, cover;
 }
 
 .timeRow {
@@ -16,9 +16,7 @@
   flex-direction: column;
   flex-grow: 1;
 
-  padding-left: 8vw;
-  padding-right: 8vw;
-  padding-bottom: 4vw;
+  padding: 4vw 8vw;
 }
 
 .expandButton {

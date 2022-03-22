@@ -1,0 +1,29 @@
+.root {
+  color: #ffffff;
+}
+
+.quote {
+  --font-scale-factor: 0.09;
+
+  margin-bottom: 14px;
+
+  line-height: 28px;
+}
+
+.figure {
+  flex-basis: 540px;
+  margin-right: 16px;
+}
+
+.author {
+  --font-scale-factor: 0.09;
+  
+  font-weight: bold;
+}
+
+.refreshButton {
+  padding: 0;
+  border: none;
+
+  background-color: transparent;
+}

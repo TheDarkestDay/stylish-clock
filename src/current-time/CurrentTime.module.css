@@ -1,17 +1,5 @@
 .currentTime {
-  --base-font-size-min: 100%;
-  --base-font-size-in-between: 5rem;
-  --base-font-size-max: 200px;
-
   color: white;
-}
-
-/* 200 > 40 > 24 > 20 */
-
-.clockTypography {
-  --font-size-min: var(--base-font-size-min) * var(--font-scale-factor);
-  --font-size-in-between: var(--base-font-size-in-between) * var(--font-scale-factor);
-  --font-size-max: var(--base-font-size-max) * var(--font-scale-factor);
 }
 
 .timeValue {
