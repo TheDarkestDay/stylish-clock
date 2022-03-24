@@ -4,6 +4,7 @@ import { FlexRow } from '../flex-row/FlexRow';
 import { CurrentTime } from '../current-time/CurrentTime';
 import { ExpandButton } from '../expand-button/ExpandButton';
 import { RandomQuote } from '../random-quote/RandomQuote';
+import { TimeDetails } from '../time-details/TimeDetails';
 import styles from './ClockScreen.module.css';
 
 type State = {
@@ -35,6 +36,8 @@ export const ClockScreen = () => {
           <ExpandButton className={styles.expandButton} onClick={handleExpandButtonClick} isExpanded={areDetailsExpanded} />
         </FlexRow>
       </div>
+
+      {areDetailsExpanded && <TimeDetails />}
     </main>
   );
 };

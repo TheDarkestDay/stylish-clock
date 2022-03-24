@@ -1,0 +1,30 @@
+.root {
+  padding: 4vw 8vw;
+
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+.fieldList {
+  flex-grow: 1;
+}
+
+.fieldDescription {
+  margin-bottom: 42px;
+}
+
+.fieldValue {
+  --font-scale-factor: 0.28;
+
+  font-weight: bold;
+  color: var(--details-text-color);
+}
+
+.fieldName {
+  --font-scale-factor: 0.07;
+
+  margin-bottom: 9px;
+
+  color: var(--details-text-color);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
