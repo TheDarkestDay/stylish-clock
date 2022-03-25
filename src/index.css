@@ -12,7 +12,7 @@ body {
   margin: 0;
 }
 
-figure, blockquote, dd {
+figure, blockquote, dd, dl {
   margin-block-start: 0;
   margin-block-end: 0;
   margin-inline-start: 0;

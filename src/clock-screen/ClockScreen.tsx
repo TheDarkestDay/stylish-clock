@@ -28,7 +28,7 @@ export const ClockScreen = () => {
   return (
     <main className={styles.main}>
       <div className={styles.timeScreen}>
-        <RandomQuote />
+        {!areDetailsExpanded && <RandomQuote />}
         
         <FlexRow className={styles.timeRow}>
           <CurrentTime />

@@ -24,3 +24,13 @@
   margin-left: auto;
   align-self: flex-end;
 }
+
+@media (max-width: 40rem) {
+  .expandButton {
+    margin-left: 0;
+  }
+
+  .timeRow {
+    row-gap: calc(1rem + 2vw);
+  }
+}

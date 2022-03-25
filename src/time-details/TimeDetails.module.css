@@ -5,11 +5,18 @@
 }
 
 .fieldList {
+  --layout-gap: calc(1rem + 2vw);
+  --cell-width: calc(50% - var(--layout-gap));
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--layout-gap);
   flex-grow: 1;
 }
 
 .fieldDescription {
-  margin-bottom: 42px;
+  flex-basis: var(--cell-width);
+  flex-grow: 1;
 }
 
 .fieldValue {
@@ -27,4 +34,17 @@
   color: var(--details-text-color);
   letter-spacing: 3px;
   text-transform: uppercase;
+}
+
+@media (max-width: 40rem) {
+  .fieldName {
+    margin-bottom: 0;
+  }
+
+  .fieldDescription {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-basis: 100%;
+  }
 }

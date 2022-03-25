@@ -13,19 +13,17 @@ export const TimeDetails = () => {
             <dd className={classNames(styles.fieldValue, 'fluidFontSize')}>Europe/London</dd>
           </div>
 
-          <div>
+          <div className={styles.fieldDescription}>
             <dt className={classNames(styles.fieldName, 'fluidFontSize')}>Day of the year</dt>
             <dd className={classNames(styles.fieldValue, 'fluidFontSize')}>295</dd>
           </div>
-        </dl>
-
-        <dl className={styles.fieldList}>
+          
           <div className={styles.fieldDescription}>
             <dt className={classNames(styles.fieldName, 'fluidFontSize')}>Day of the week</dt>
             <dd className={classNames(styles.fieldValue, 'fluidFontSize')}>5</dd>
           </div>
 
-          <div>
+          <div className={styles.fieldDescription}>
             <dt className={classNames(styles.fieldName, 'fluidFontSize')}>Week number</dt>
             <dd className={classNames(styles.fieldValue, 'fluidFontSize')}>42</dd>
           </div>
