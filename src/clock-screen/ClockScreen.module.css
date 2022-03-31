@@ -3,9 +3,23 @@
   display: flex;
   flex-direction: column;
 
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../assets/desktop/bg-image-daytime.jpg");
+  background-image: url("../assets/desktop/bg-image-daytime.jpg");
   background-repeat: no-repeat, no-repeat;
   background-size: cover, cover;
+  background-blend-mode: darken;
+  transition: background-image 1.5s;
+}
+
+.mainNight {
+  background-image: url("../assets/desktop/bg-image-nighttime.jpg");
+}
+
+.overlayContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
 }
 
 .timeRow {

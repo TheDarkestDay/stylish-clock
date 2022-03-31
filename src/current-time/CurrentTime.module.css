@@ -5,6 +5,8 @@
 .timeValue {
   --font-scale-factor: 1;
 
+  margin-right: 12px;
+
   font-weight: bold;
   letter-spacing: -5px;
 }

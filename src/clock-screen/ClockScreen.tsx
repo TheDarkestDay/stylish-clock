@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import classNames from 'classnames';
 
 import { FlexRow } from '../flex-row/FlexRow';
 import { CurrentTime } from '../current-time/CurrentTime';
@@ -9,14 +10,16 @@ import styles from './ClockScreen.module.css';
 
 type State = {
   areDetailsExpanded: boolean;
+  timeOfTheDay: 'day' | 'night';
 };
 
 export const ClockScreen = () => {
   const [state, setState] = useState<State>({
     areDetailsExpanded: false,
+    timeOfTheDay: 'day',
   });
 
-  const { areDetailsExpanded } = state;
+  const { areDetailsExpanded, timeOfTheDay } = state;
 
   const handleExpandButtonClick = () => {
     setState((oldState) => ({
@@ -25,19 +28,34 @@ export const ClockScreen = () => {
     }));
   };
 
+  const handleTick = (currentTime: Date) => {
+    const hours = currentTime.getHours();
+
+    const actualTimeOfTheDay = hours >= 6 && hours < 18 ? 'day' : 'night';
+    
+    if (actualTimeOfTheDay !== timeOfTheDay) {
+      setState((oldState) => ({
+        ...oldState,
+        timeOfTheDay: actualTimeOfTheDay,
+      }));  
+    }
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.timeScreen}>
-        {!areDetailsExpanded && <RandomQuote />}
-        
-        <FlexRow className={styles.timeRow}>
-          <CurrentTime />
+    <main className={classNames(styles.main, timeOfTheDay === 'night' && styles.mainNight)}>
+      <div className={styles.overlayContainer}>
+        <div className={styles.timeScreen}>
+          {!areDetailsExpanded && <RandomQuote />}
+          
+          <FlexRow className={styles.timeRow}>
+            <CurrentTime onTick={handleTick} />
 
-          <ExpandButton className={styles.expandButton} onClick={handleExpandButtonClick} isExpanded={areDetailsExpanded} />
-        </FlexRow>
+            <ExpandButton className={styles.expandButton} onClick={handleExpandButtonClick} isExpanded={areDetailsExpanded} />
+          </FlexRow>
+        </div>
+
+        {areDetailsExpanded && <TimeDetails />}
       </div>
-
-      {areDetailsExpanded && <TimeDetails />}
     </main>
   );
 };
