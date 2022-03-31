@@ -10,7 +10,7 @@ export const CurrentTime = () => {
       </p>
 
       <div>
-        <time className={classNames(styles.timeValue, 'fluidFontSize')} dateTime="11:37">11:37</time>
+        <time className={classNames(styles.timeValue, 'fluidFontSize')} dateTime="11:37">11<span className={styles.timeDelimiter}>:</span>37</time>
         <span className={classNames(styles.timeZone, 'fluidFontSize')}>BST</span>
         <p className={classNames(styles.location, 'fluidFontSize')}>in London, UK</p>
       </div>
