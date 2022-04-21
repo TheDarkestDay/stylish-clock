@@ -3,7 +3,11 @@
 }
 
 .quote {
-  --font-scale-factor: 0.09;
+  /* 12 --> 18 */
+  --font-size-min: 0.75rem;
+  --font-size-in-between: 0.617rem;
+  --font-size-max: 1.125rem;
+  --viewport-increment: 0.563vw;
 
   margin-bottom: 14px;
 
@@ -16,7 +20,11 @@
 }
 
 .author {
-  --font-scale-factor: 0.09;
+  /* 12 --> 18 */
+  --font-size-min: 0.75rem;
+  --font-size-in-between: 0.617rem;
+  --font-size-max: 1.125rem;
+  --viewport-increment: 0.563vw;
   
   font-weight: bold;
 }

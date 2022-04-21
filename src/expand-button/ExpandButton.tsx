@@ -17,7 +17,7 @@ export const ExpandButton = ({onClick, isExpanded, className}: Props) => {
   return (
     <section className={containerClassName}>
       <button onClick={onClick} className={buttonClassName}>
-        <span className={styles.buttonCaption}>
+        <span className={classNames('fluidFontSize', styles.buttonCaption)}>
           {buttonText}
         </span>
       </button>

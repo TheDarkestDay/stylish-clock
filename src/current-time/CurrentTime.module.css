@@ -3,7 +3,11 @@
 }
 
 .timeValue {
-  --font-scale-factor: 1;
+  /* 100px --> 200px */
+  --font-size-min: 6.25rem;
+  --font-size-in-between: 4.05rem;
+  --font-size-max: 12.5rem;
+  --viewport-increment: 9.38vw;
 
   margin-right: 12px;
 
@@ -12,7 +16,11 @@
 }
 
 .location {
-  --font-scale-factor: 0.12;
+  /* 15px --> 24px */
+  --font-size-min: 0.9375rem;
+  --font-size-in-between: 0.739rem;
+  --font-size-max: 1.5rem;
+  --viewport-increment: 0.845vw;
 
   margin: 0;
 
@@ -22,13 +30,21 @@
 }
 
 .timeZone {
-  --font-scale-factor: 0.2;
+  /* 15 --> 40 */
+  --font-size-min: 0.937rem;
+  --font-size-in-between: 0.387rem;
+  --font-size-max: 2.5rem;
+  --viewport-increment: 2.347vw;
 
   font-weight: 300;
 }
 
 .greeting {
-  --font-scale-factor: 0.1;
+  /* 15 --> 20 */
+  --font-size-min: 0.9375rem;
+  --font-size-in-between: 0.827rem;
+  --font-size-max: 1.25rem;
+  --viewport-increment: 0.469vw;
 
   margin: 0;
 

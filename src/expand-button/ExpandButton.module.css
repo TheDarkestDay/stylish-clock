@@ -31,9 +31,14 @@
 }
 
 .buttonCaption {
+  /* 12 --> 16 */
+  --font-size-min: 0.75rem;
+  --font-size-in-between: 0.661rem;
+  --font-size-max: 1rem;
+  --viewport-increment: 0.375vw;
+
   line-height: 28px;
   font-weight: bold;
-  font-size: 16px;
   letter-spacing: 5px;
   text-transform: uppercase;
 
