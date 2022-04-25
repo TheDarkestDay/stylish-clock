@@ -3,9 +3,15 @@ import classNames from 'classnames';
 import { FlexRow } from '../flex-row/FlexRow';
 import styles from './TimeDetails.module.css';
 
-export const TimeDetails = () => {
+type Props = {
+  theme?: 'day' | 'night';
+};
+
+export const TimeDetails = ({theme}: Props) => {
+  const themeToApply = theme || 'day';
+
   return (
-    <section className={styles.root}>
+    <section className={classNames(styles.root, themeToApply === 'night' && styles.rootNight)}>
       <FlexRow>
         <dl className={styles.fieldList}>
           <div className={styles.fieldDescription}>

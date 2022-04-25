@@ -1,7 +1,15 @@
 .root {
+  --text-color: #303030;
+  --background-color: rgba(255, 255, 255, 0.75);
+
   padding: 4vw 8vw;
 
-  background-color: rgba(255, 255, 255, 0.75);
+  background-color: var(--background-color);
+}
+
+.rootNight {
+  --text-color: #fff;
+  --background-color: rgba(0, 0, 0, 0.75);
 }
 
 .fieldList {
@@ -27,7 +35,7 @@
   --viewport-increment: 3.380vw;
 
   font-weight: bold;
-  color: var(--details-text-color);
+  color: var(--text-color);
 }
 
 .fieldName {
@@ -39,7 +47,7 @@
 
   margin-bottom: 9px;
 
-  color: var(--details-text-color);
+  color: var(--text-color);
   letter-spacing: 3px;
   text-transform: uppercase;
 }

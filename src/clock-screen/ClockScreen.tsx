@@ -54,7 +54,7 @@ export const ClockScreen = () => {
           </FlexRow>
         </div>
 
-        {areDetailsExpanded && <TimeDetails />}
+        {areDetailsExpanded && <TimeDetails theme={timeOfTheDay} />}
       </div>
     </main>
   );
