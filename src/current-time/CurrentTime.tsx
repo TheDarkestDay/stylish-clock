@@ -18,6 +18,10 @@ const timeFormat = new Intl.DateTimeFormat([], {
   hourCycle: 'h24',
 });
 
+const clockWorker = new Worker(
+  new URL('./clock.worker.ts', import.meta.url),
+);
+
 export const CurrentTime = ({onTick}: Props) => {
   const [state, setState] = useState<State>({
     currentTime: new Date(),
@@ -31,16 +35,13 @@ export const CurrentTime = ({onTick}: Props) => {
   }, [currentTime, onTick]);
 
   useEffect(() => {
-    const checkTimeAfter = 60 - elapsedSeconds;
+    clockWorker.postMessage('start');
 
-    const timeout = setTimeout(() => {
-      setState((oldState) => ({
-        ...oldState,
-        currentTime: new Date(),
-      }));
-    }, checkTimeAfter * 1000);
+    clockWorker.onmessage = ({data: currentTime}) => {
+      setState({currentTime});
+    };
 
-    return () => clearTimeout(timeout);
+    return () => clockWorker.postMessage('stop');
   }, [elapsedSeconds, setState]);
 
   const formattedTime = timeFormat.format(currentTime);
