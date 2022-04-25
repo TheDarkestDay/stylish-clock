@@ -1,6 +1,9 @@
 .root {
   --text-color: #303030;
+  --separator-color: rgba(48, 48, 48, 0.25);
   --background-color: rgba(255, 255, 255, 0.75);
+  --layout-gap: calc(1rem + 2vw);
+  --cell-width: calc(50% - var(--layout-gap));
 
   padding: 4vw 8vw;
 
@@ -10,20 +13,30 @@
 .rootNight {
   --text-color: #fff;
   --background-color: rgba(0, 0, 0, 0.75);
+  --separator-color: rgba(255, 255, 255, 0.25);
+}
+
+.fieldsColumn {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-basis: var(--cell-width);
+  gap: var(--layout-gap);
+  border-right: 1px solid var(--separator-color);
+}
+
+.fieldsColumn:last-of-type {
+  border-right: none;
 }
 
 .fieldList {
-  --layout-gap: calc(1rem + 2vw);
-  --cell-width: calc(50% - var(--layout-gap));
-
   display: flex;
   flex-wrap: wrap;
-  gap: var(--layout-gap);
   flex-grow: 1;
+  gap: var(--layout-gap);
 }
 
 .fieldDescription {
-  flex-basis: var(--cell-width);
   flex-grow: 1;
 }
 
@@ -62,5 +75,9 @@
     align-items: center;
     justify-content: space-between;
     flex-basis: 100%;
+  }
+
+  .fieldsColumn {
+    border: none;
   }
 }

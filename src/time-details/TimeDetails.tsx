@@ -14,24 +14,28 @@ export const TimeDetails = ({theme}: Props) => {
     <section className={classNames(styles.root, themeToApply === 'night' && styles.rootNight)}>
       <FlexRow>
         <dl className={styles.fieldList}>
-          <div className={styles.fieldDescription}>
-            <dt className={classNames(styles.fieldName, 'fluidFontSize')}>Current timezone</dt>
-            <dd className={classNames(styles.fieldValue, 'fluidFontSize')}>Europe/London</dd>
-          </div>
+          <div className={styles.fieldsColumn}>
+            <div className={styles.fieldDescription}>
+              <dt className={classNames(styles.fieldName, 'fluidFontSize')}>Current timezone</dt>
+              <dd className={classNames(styles.fieldValue, 'fluidFontSize')}>Europe/London</dd>
+            </div>
 
-          <div className={styles.fieldDescription}>
-            <dt className={classNames(styles.fieldName, 'fluidFontSize')}>Day of the year</dt>
-            <dd className={classNames(styles.fieldValue, 'fluidFontSize')}>295</dd>
+            <div className={styles.fieldDescription}>
+              <dt className={classNames(styles.fieldName, 'fluidFontSize')}>Day of the year</dt>
+              <dd className={classNames(styles.fieldValue, 'fluidFontSize')}>295</dd>
+            </div>
           </div>
           
-          <div className={styles.fieldDescription}>
-            <dt className={classNames(styles.fieldName, 'fluidFontSize')}>Day of the week</dt>
-            <dd className={classNames(styles.fieldValue, 'fluidFontSize')}>5</dd>
-          </div>
+          <div className={styles.fieldsColumn}>
+            <div className={styles.fieldDescription}>
+              <dt className={classNames(styles.fieldName, 'fluidFontSize')}>Day of the week</dt>
+              <dd className={classNames(styles.fieldValue, 'fluidFontSize')}>5</dd>
+            </div>
 
-          <div className={styles.fieldDescription}>
-            <dt className={classNames(styles.fieldName, 'fluidFontSize')}>Week number</dt>
-            <dd className={classNames(styles.fieldValue, 'fluidFontSize')}>42</dd>
+            <div className={styles.fieldDescription}>
+              <dt className={classNames(styles.fieldName, 'fluidFontSize')}>Week number</dt>
+              <dd className={classNames(styles.fieldValue, 'fluidFontSize')}>42</dd>
+            </div>
           </div>
         </dl>
       </FlexRow>
