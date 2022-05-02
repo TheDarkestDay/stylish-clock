@@ -52,6 +52,11 @@
   letter-spacing: 4px;
 }
 
+.greetingIcon {
+  margin-right: 16px;
+  vertical-align: middle;
+}
+
 .timeDelimiter {
   animation-name: blink;
   animation-duration: 1.5s;

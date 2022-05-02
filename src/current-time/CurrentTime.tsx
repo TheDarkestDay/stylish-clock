@@ -1,9 +1,12 @@
 import classNames from 'classnames';
 
+import { ReactComponent as MoonIcon } from '../assets/desktop/icon-moon.svg';
+import { ReactComponent as SunIcon } from '../assets/desktop/icon-sun.svg';
 import styles from './CurrentTime.module.css';
 
 type Props = {
   value: Date;
+  timeOfTheDay: 'day' | 'night';
 };
 
 const timeFormat = new Intl.DateTimeFormat([], {
@@ -13,15 +16,18 @@ const timeFormat = new Intl.DateTimeFormat([], {
   hourCycle: 'h24',
 });
 
-export const CurrentTime = ({value}: Props) => {
+export const CurrentTime = ({value, timeOfTheDay}: Props) => {
   const formattedTime = timeFormat.format(value);
   const [time, timeZone] = formattedTime.split(' ');
   const [hours, minutes] = time.split(':');
 
+  const greetingIcon = timeOfTheDay === 'day' ? <SunIcon /> : <MoonIcon />;
+  const greetingText = timeOfTheDay === 'day' ? 'Good morning' : 'Good evening';
+
   return (
     <section className={styles.currentTime}>
       <p className={classNames(styles.greeting, 'fluidFontSize')}>
-        Good morning, it's currently
+        <span className={styles.greetingIcon}>{greetingIcon}</span>{greetingText}, it's currently
       </p>
 
       <div>

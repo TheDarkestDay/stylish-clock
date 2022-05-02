@@ -52,7 +52,7 @@ export const ClockScreen = () => {
           {!areDetailsExpanded && <RandomQuote />}
           
           <FlexRow className={styles.timeRow}>
-            <CurrentTime value={currentTime} />
+            <CurrentTime value={currentTime} timeOfTheDay={timeOfTheDay} />
 
             <ExpandButton className={styles.expandButton} onClick={handleExpandButtonClick} isExpanded={areDetailsExpanded} />
           </FlexRow>
