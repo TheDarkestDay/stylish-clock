@@ -1,14 +1,9 @@
-import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 
 import styles from './CurrentTime.module.css';
 
 type Props = {
-  onTick: (time: Date) => void;
-};
-
-type State = {
-  currentTime: Date;
+  value: Date;
 };
 
 const timeFormat = new Intl.DateTimeFormat([], {
@@ -18,33 +13,8 @@ const timeFormat = new Intl.DateTimeFormat([], {
   hourCycle: 'h24',
 });
 
-const clockWorker = new Worker(
-  new URL('./clock.worker.ts', import.meta.url),
-);
-
-export const CurrentTime = ({onTick}: Props) => {
-  const [state, setState] = useState<State>({
-    currentTime: new Date(),
-  });
-
-  const { currentTime } = state;
-  const elapsedSeconds = currentTime.getSeconds();
-
-  useEffect(() => {
-    onTick(currentTime);
-  }, [currentTime, onTick]);
-
-  useEffect(() => {
-    clockWorker.postMessage('start');
-
-    clockWorker.onmessage = ({data: currentTime}) => {
-      setState({currentTime});
-    };
-
-    return () => clockWorker.postMessage('stop');
-  }, [elapsedSeconds, setState]);
-
-  const formattedTime = timeFormat.format(currentTime);
+export const CurrentTime = ({value}: Props) => {
+  const formattedTime = timeFormat.format(value);
   const [time, timeZone] = formattedTime.split(' ');
   const [hours, minutes] = time.split(':');
 
