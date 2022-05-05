@@ -6,6 +6,8 @@ import styles from './CurrentTime.module.css';
 
 type Props = {
   value: Date;
+  country?: string;
+  city?: string;
   timeOfTheDay: 'day' | 'night';
 };
 
@@ -16,7 +18,7 @@ const timeFormat = new Intl.DateTimeFormat([], {
   hourCycle: 'h24',
 });
 
-export const CurrentTime = ({value, timeOfTheDay}: Props) => {
+export const CurrentTime = ({value, timeOfTheDay, country = 'where you belong', city = 'Somewhere'}: Props) => {
   const formattedTime = timeFormat.format(value);
   const [time, timeZone] = formattedTime.split(' ');
   const [hours, minutes] = time.split(':');
@@ -33,7 +35,7 @@ export const CurrentTime = ({value, timeOfTheDay}: Props) => {
       <div>
         <time className={classNames(styles.timeValue, 'fluidFontSize')} dateTime={formattedTime}>{hours}<span className={styles.timeDelimiter}>:</span>{minutes}</time>
         <span className={classNames(styles.timeZone, 'fluidFontSize')}>{timeZone}</span>
-        <p className={classNames(styles.location, 'fluidFontSize')}>in London, UK</p>
+        <p className={classNames(styles.location, 'fluidFontSize')}>in {city}, {country}</p>
       </div>
     </section>
   );

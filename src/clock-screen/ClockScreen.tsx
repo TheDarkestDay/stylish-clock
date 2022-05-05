@@ -8,9 +8,12 @@ import { RandomQuote } from '../random-quote/RandomQuote';
 import { TimeDetails } from '../time-details/TimeDetails';
 import { useClock } from './use-clock';
 import styles from './ClockScreen.module.css';
+import { getAddress } from '../firebase';
 
 type State = {
   areDetailsExpanded: boolean;
+  city?: string;
+  country?: string;
   timeOfTheDay: 'day' | 'night';
 };
 
@@ -23,7 +26,7 @@ export const ClockScreen = () => {
   });
   const currentTime = useClock();
 
-  const { areDetailsExpanded, timeOfTheDay } = state;
+  const { areDetailsExpanded, timeOfTheDay, country, city } = state;
 
   const handleExpandButtonClick = () => {
     setState((oldState) => ({
@@ -45,6 +48,25 @@ export const ClockScreen = () => {
     }
   }, [currentTime, timeOfTheDay, setState]);
 
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+
+      getAddress({ lat: latitude, long: longitude })
+        .then((result) => {
+          const { city, country } = result.data;
+
+          setState((oldState) => {
+            return {
+              ...oldState,
+              city,
+              country,
+            }
+          });
+        })
+    });
+  }, [setState]);
+
   return (
     <main className={classNames(styles.main, timeOfTheDay === 'night' && styles.mainNight)}>
       <div className={styles.overlayContainer}>
@@ -52,7 +74,7 @@ export const ClockScreen = () => {
           {!areDetailsExpanded && <RandomQuote />}
           
           <FlexRow className={styles.timeRow}>
-            <CurrentTime value={currentTime} timeOfTheDay={timeOfTheDay} />
+            <CurrentTime value={currentTime} country={country} city={city} timeOfTheDay={timeOfTheDay} />
 
             <ExpandButton className={styles.expandButton} onClick={handleExpandButtonClick} isExpanded={areDetailsExpanded} />
           </FlexRow>
