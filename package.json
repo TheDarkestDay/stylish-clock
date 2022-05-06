@@ -1,5 +1,6 @@
 {
   "name": "clock",
+  "homepage": "/clock",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
