@@ -1,3 +1,4 @@
+import { getRandomQuote } from './../firebase/functions';
 import { useState, useEffect } from 'react';
 
 type Quote = {
@@ -9,17 +10,6 @@ type State = {
   quote: Quote | null;
   isLoading: boolean;
 };
-
-type ZenQuotesQuote = {
-  a: string;
-  q: string;
-};
-
-type ZenQuotesResponse = ZenQuotesQuote[];
-
-const RANDOM_QUOTE_URL = 'https://zenquotes.io/api/random';
-
-const ZENQUOTES_API_LINK = 'https://zenquotes.io/';
 
 const defaultQuote = {
   author: 'Ada Lovelace',
@@ -35,21 +25,26 @@ export const useRemoteQuote = () => {
   const { quote, isLoading } = state;
 
   useEffect(() => {
-    setState((oldState) => ({...oldState, isLoading: true}));
+    if (quote == null) {
+      setState((oldState) => ({...oldState, isLoading: true}));
 
-    fetch(RANDOM_QUOTE_URL)
-      .then((response) => response.json())
-      .then((data: ZenQuotesResponse) => {
-        const [{q: text, a: author}] = data;
+      getRandomQuote()
+        .then((result) => {
+          const quote = result.data;
 
-        setState((oldState) => ({...oldState, quote: {author, text}, isLoading: false}));
-      })
-      .catch((error) => {
-        console.log('An error occurred while fetching the quote: ', error);
+          setState((oldState) => ({...oldState, quote, isLoading: false, shouldReload: false,}));
+        })
+        .catch((error) => {
+          console.log('An error occurred while fetching the quote: ', error);
 
-        setState((oldState) => ({...oldState, quote: defaultQuote, isLoading: false}));
-      });
-  }, [setState]);
+          setState((oldState) => ({...oldState, quote: defaultQuote, isLoading: false, shouldReload: false}));
+        });
+    }
+  }, [setState, quote]);
 
-  return { quote, isLoading, attributionLink: ZENQUOTES_API_LINK };
+  const reload = () => {
+    setState((oldState) => ({...oldState, quote: null}));
+  };
+
+  return { quote, isLoading, reload };
 };

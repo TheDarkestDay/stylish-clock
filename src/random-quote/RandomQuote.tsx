@@ -5,8 +5,14 @@ import { FlexRow } from '../flex-row/FlexRow';
 import styles from './RandomQuote.module.css';
 import { useRemoteQuote } from './use-remote-quote';
 
+const ZENQUOTES_API_LINK = 'https://zenquotes.io/';
+
 export const RandomQuote = () => {
-  const { quote, isLoading, attributionLink } = useRemoteQuote();
+  const { quote, isLoading, reload } = useRemoteQuote();
+
+  const handleReloadButtonClick = () => {
+    reload();
+  };
 
   return (
     <FlexRow className={styles.root} alignItems="start">
@@ -24,14 +30,14 @@ export const RandomQuote = () => {
                 </figcaption>
         
                 <p className={styles.attribution}>
-                  inspirational quote got from <a className={styles.link} href={attributionLink}>ZenQuotes API</a>
+                  inspirational quote got from <a className={styles.link} href={ZENQUOTES_API_LINK}>ZenQuotes API</a>
                 </p>
             </>
         }
       </figure>
 
-      <button className={styles.refreshButton}>
-        <RefreshIcon />
+      <button onClick={handleReloadButtonClick} className={styles.refreshButton}>
+        <RefreshIcon className={classNames(isLoading && styles.refreshIconSpinning)} />
       </button>
     </FlexRow>
   );

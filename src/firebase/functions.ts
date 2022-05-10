@@ -15,3 +15,11 @@ type GetAddressResponseData = {
 };
 
 export const getAddress = httpsCallable<GetAddressRequestData, GetAddressResponseData>(functions, 'getAddress');
+
+
+type GetRandomQuoteResponseDate = {
+  text: string;
+  author: string;
+};
+
+export const getRandomQuote = httpsCallable<void, GetRandomQuoteResponseDate>(functions, 'getRandomQuote');

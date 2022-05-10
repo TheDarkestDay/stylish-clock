@@ -63,3 +63,30 @@ export const getAddress = functions.runWith({secrets: ['LOCATIONIQ_API_KEY']})
     }
   }
 );
+
+const RANDOM_QUOTE_URL = 'https://zenquotes.io/api/random';
+
+type ZenQuotesQuote = {
+  a: string;
+  q: string;
+};
+
+type ZenQuotesResponse = ZenQuotesQuote[];
+
+export const getRandomQuote = functions
+  .https
+  .onCall(async () => {
+    try {
+      const apiResponse = await axios.get<ZenQuotesResponse>(RANDOM_QUOTE_URL);
+      const [{q: text, a: author}] = apiResponse.data;
+
+      return {
+        text,
+        author
+      };
+    } catch (error) {
+      functions.logger.error(`Failed to get a random quote due to: ${JSON.stringify(error)}`);
+
+      throw new functions.https.HttpsError('internal', 'Failed to get a quote');
+    }
+  });
