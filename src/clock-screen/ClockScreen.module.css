@@ -6,6 +6,7 @@
   background-image: url("../assets/desktop/bg-image-daytime.jpg");
   background-repeat: no-repeat, no-repeat;
   background-size: cover, cover;
+  background-position: center, center;
   background-blend-mode: darken;
   transition: background-image 1.5s;
 }
@@ -29,7 +30,7 @@
 .timeScreen {
   display: flex;
   flex-direction: column;
-  flex-grow: 2;
+  flex-grow: 1;
 
   padding: 4vw 8vw;
 }
