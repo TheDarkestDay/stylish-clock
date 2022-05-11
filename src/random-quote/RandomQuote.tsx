@@ -7,7 +7,11 @@ import { useRemoteQuote } from './use-remote-quote';
 
 const ZENQUOTES_API_LINK = 'https://zenquotes.io/';
 
-export const RandomQuote = () => {
+type Props = {
+  className?: string;
+};
+
+export const RandomQuote = ({className}: Props) => {
   const { quote, isLoading, reload } = useRemoteQuote();
 
   const handleReloadButtonClick = () => {
@@ -15,7 +19,7 @@ export const RandomQuote = () => {
   };
 
   return (
-    <FlexRow className={styles.root} alignItems="start">
+    <FlexRow className={classNames(styles.root, className)} alignItems="start">
       <figure className={styles.figure}>
         {
           isLoading 

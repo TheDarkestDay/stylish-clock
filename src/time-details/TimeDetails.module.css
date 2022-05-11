@@ -5,6 +5,8 @@
   --layout-gap: calc(1rem + 2vw);
   --cell-width: calc(50% - var(--layout-gap));
 
+  display: flex;
+  align-items: center;
   padding: 4vw 8vw;
 
   background-color: var(--background-color);
@@ -14,6 +16,10 @@
   --text-color: #fff;
   --background-color: rgba(0, 0, 0, 0.75);
   --separator-color: rgba(255, 255, 255, 0.25);
+}
+
+.row {
+  flex-grow: 1;
 }
 
 .fieldsColumn {

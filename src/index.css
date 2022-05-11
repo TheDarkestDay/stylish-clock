@@ -18,3 +18,7 @@ figure, blockquote, dd, dl {
   margin-inline-start: 0;
   margin-inline-end: 0;
 }
+
+html, body, #root {
+  height: 100%;
+}

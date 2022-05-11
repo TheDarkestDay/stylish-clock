@@ -6,11 +6,12 @@ import styles from './TimeDetails.module.css';
 
 type Props = {
   theme?: 'day' | 'night';
+  className?: string;
   timeZone: string;
   currentTime: Date;
 };
 
-export const TimeDetails = ({theme, timeZone, currentTime}: Props) => {
+export const TimeDetails = ({theme, className, timeZone, currentTime}: Props) => {
   const themeToApply = theme || 'day';
 
   const dayOfTheWeekNumber = currentTime.getDay();
@@ -18,8 +19,8 @@ export const TimeDetails = ({theme, timeZone, currentTime}: Props) => {
   const dayOfTheYearNumber = getDayOfYear(currentTime);
 
   return (
-    <section className={classNames(styles.root, themeToApply === 'night' && styles.rootNight)}>
-      <FlexRow>
+    <section className={classNames(styles.root, themeToApply === 'night' && styles.rootNight, className)}>
+      <FlexRow className={styles.row}>
         <dl className={styles.fieldList}>
           <div className={styles.fieldsColumn}>
             <div className={styles.fieldDescription}>

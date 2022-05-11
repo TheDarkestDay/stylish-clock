@@ -71,7 +71,7 @@ export const ClockScreen = () => {
     <main className={classNames(styles.main, timeOfTheDay === 'night' && styles.mainNight)}>
       <div className={styles.overlayContainer}>
         <div className={styles.timeScreen}>
-          {!areDetailsExpanded && <RandomQuote />}
+          <RandomQuote className={classNames(areDetailsExpanded && styles.hidden)}/>
           
           <FlexRow className={styles.timeRow}>
             <CurrentTime value={currentTime} country={country} city={city} timeOfTheDay={timeOfTheDay} />
@@ -80,7 +80,7 @@ export const ClockScreen = () => {
           </FlexRow>
         </div>
 
-        {areDetailsExpanded && <TimeDetails theme={timeOfTheDay} currentTime={currentTime} timeZone={timeZoneReadableName}/>}
+        {areDetailsExpanded && <TimeDetails className={styles.timeDetails} theme={timeOfTheDay} currentTime={currentTime} timeZone={timeZoneReadableName}/>}
       </div>
     </main>
   );
