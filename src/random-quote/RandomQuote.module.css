@@ -51,7 +51,19 @@
 }
 
 .attribution {
+  /* 10 --> 16 */
+  --font-size-min: 0.625rem;
+  --font-size-in-between: 0.492rem;
+  --font-size-max: 1rem;
+  --viewport-increment: 0.563vw;
+
   margin: 0;
+}
+
+@media (max-width: 44rem) {
+  .attribution {
+    margin-bottom: 1rem;
+  }
 }
 
 .link {

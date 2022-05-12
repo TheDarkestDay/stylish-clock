@@ -2,7 +2,7 @@
   --text-color: #303030;
   --separator-color: rgba(48, 48, 48, 0.25);
   --background-color: rgba(255, 255, 255, 0.75);
-  --layout-gap: calc(1rem + 2vw);
+  --layout-gap: 2.625rem;
   --cell-width: calc(50% - var(--layout-gap));
 
   display: flex;
@@ -71,7 +71,23 @@
   text-transform: uppercase;
 }
 
+@media (max-width: 90rem) {
+  .root {
+    --layout-gap: 4rem;
+  }
+}
+
+@media (max-width: 60rem) {
+  .fieldsColumn {
+    border: none;
+  }
+}
+
 @media (max-width: 40rem) {
+  .root {
+    --layout-gap: 1rem;
+  }
+
   .fieldName {
     margin-bottom: 0;
   }
@@ -81,9 +97,5 @@
     align-items: center;
     justify-content: space-between;
     flex-basis: 100%;
-  }
-
-  .fieldsColumn {
-    border: none;
   }
 }

@@ -33,8 +33,8 @@ export const RandomQuote = ({className}: Props) => {
                   {quote?.author}
                 </figcaption>
         
-                <p className={styles.attribution}>
-                  inspirational quote got from <a className={styles.link} href={ZENQUOTES_API_LINK}>ZenQuotes API</a>
+                <p className={classNames(styles.attribution, 'fluidFontSize')}>
+                  Inspirational quote got from <a className={styles.link} href={ZENQUOTES_API_LINK}>ZenQuotes API</a>
                 </p>
             </>
         }
