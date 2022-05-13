@@ -8,7 +8,7 @@ import { RandomQuote } from '../random-quote/RandomQuote';
 import { TimeDetails } from '../time-details/TimeDetails';
 import { useClock } from './use-clock';
 import styles from './ClockScreen.module.css';
-import { getAddress } from '../firebase';
+import { getAddress, getAddressByIp } from '../firebase';
 
 type State = {
   areDetailsExpanded: boolean;
@@ -64,6 +64,19 @@ export const ClockScreen = () => {
             }
           });
         })
+    }, () => {
+        getAddressByIp()
+          .then((result) => {
+            const { city, country } = result.data;
+
+            setState((oldState) => {
+              return {
+                ...oldState,
+                city,
+                country,
+              }
+            });
+          });
     });
   }, [setState]);
 

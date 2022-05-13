@@ -16,6 +16,7 @@ type GetAddressResponseData = {
 
 export const getAddress = httpsCallable<GetAddressRequestData, GetAddressResponseData>(functions, 'getAddress');
 
+export const getAddressByIp = httpsCallable<GetAddressRequestData, GetAddressResponseData>(functions, 'getAddressByIp');
 
 type GetRandomQuoteResponseDate = {
   text: string;

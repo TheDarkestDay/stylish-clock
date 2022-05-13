@@ -18,13 +18,15 @@ const timeFormat = new Intl.DateTimeFormat([], {
   hourCycle: 'h24',
 });
 
-export const CurrentTime = ({value, timeOfTheDay, country = 'where you belong', city = 'Somewhere'}: Props) => {
+export const CurrentTime = ({value, timeOfTheDay, country, city}: Props) => {
   const formattedTime = timeFormat.format(value);
   const [time, timeZone] = formattedTime.split(' ');
   const [hours, minutes] = time.split(':');
 
   const greetingIcon = timeOfTheDay === 'day' ? <SunIcon /> : <MoonIcon />;
   const greetingText = timeOfTheDay === 'day' ? 'Good morning' : 'Good evening';
+
+  const locationContent = country && city ? `in ${city}, ${country}` : 'in your location';
 
   return (
     <section className={styles.currentTime}>
@@ -35,7 +37,9 @@ export const CurrentTime = ({value, timeOfTheDay, country = 'where you belong', 
       <div>
         <time className={classNames(styles.timeValue, 'fluidFontSize')} dateTime={formattedTime}>{hours}<span className={styles.timeDelimiter}>:</span>{minutes}</time>
         <span className={classNames(styles.timeZone, 'fluidFontSize')}>{timeZone}</span>
-        <p className={classNames(styles.location, 'fluidFontSize')}>in {city}, {country}</p>
+        <p className={classNames(styles.location, 'fluidFontSize')}>
+          {locationContent}
+        </p>
       </div>
     </section>
   );

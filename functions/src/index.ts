@@ -64,6 +64,41 @@ export const getAddress = functions.runWith({secrets: ['LOCATIONIQ_API_KEY']})
   }
 );
 
+const IP_GEOLOCATION_ENDPOINT = 'http://ip-api.com/json/';
+
+type IpGeolocationResponse = {
+  ip: string;
+  country: string;
+  city: string;
+  status: string;
+};
+
+export const getAddressByIp = functions
+  .https
+  .onCall(async (_, context) => {
+    const ip = context.rawRequest.headers['fastly-client-ip'] ?? context.rawRequest.ip;
+
+    functions.logger.debug(`Got client IP: ${ip}`);
+
+    try {
+      const apiResponse = await axios.get<IpGeolocationResponse>(IP_GEOLOCATION_ENDPOINT + ip);
+      const { country, city, status } = apiResponse.data;
+
+      if (status !== "success") {
+        functions.logger.error(`Failed to get location by IP ${ip} with status: ${status}`);
+
+        throw new functions.https.HttpsError('internal', 'Internal server error');
+      }
+
+      return {
+        country,
+        city
+      };
+    } catch (error) {
+      throw new functions.https.HttpsError('internal', 'Internal server error');
+    }
+  });
+
 const RANDOM_QUOTE_URL = 'https://zenquotes.io/api/random';
 
 type ZenQuotesQuote = {
