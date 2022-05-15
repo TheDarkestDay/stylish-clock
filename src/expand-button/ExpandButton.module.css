@@ -30,6 +30,10 @@
   transform: rotate(180deg);
 }
 
+.expandButton:hover::after {
+  background-color: #999999;
+}
+
 .buttonCaption {
   /* 12 --> 16 */
   --font-size-min: 0.75rem;
@@ -37,6 +41,7 @@
   --font-size-max: 1rem;
   --viewport-increment: 0.375vw;
 
+  color: #000000;
   line-height: 28px;
   font-weight: bold;
   letter-spacing: 5px;
