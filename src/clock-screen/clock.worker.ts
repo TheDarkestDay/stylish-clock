@@ -4,7 +4,7 @@ const checkTime = (durationS: number) => {
 
     postMessage(newTime);
 
-    checkTime(1);
+    checkTime(60);
   }, durationS * 1000);
 };
 

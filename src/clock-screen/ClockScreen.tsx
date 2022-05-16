@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 
 import { FlexRow } from '../flex-row/FlexRow';
@@ -25,6 +25,7 @@ export const ClockScreen = () => {
     timeOfTheDay: 'day',
   });
   const currentTime = useClock();
+  const timeDetailsRef = useRef<TimeDetailsRef | null>(null);
 
   const { areDetailsExpanded, timeOfTheDay, country, city } = state;
 
@@ -33,12 +34,6 @@ export const ClockScreen = () => {
       ...oldState,
       areDetailsExpanded: !oldState.areDetailsExpanded,
     }));
-  };
-
-  const handleTimeDetailsRendered = (ref: TimeDetailsRef | null) => {
-    if (ref != null) {
-      ref.focusContent();
-    }
   };
 
   useEffect(() => {
@@ -53,6 +48,12 @@ export const ClockScreen = () => {
       }));  
     }
   }, [currentTime, timeOfTheDay, setState]);
+
+  useEffect(() => {
+    if (areDetailsExpanded) {
+      timeDetailsRef.current?.focusContent();
+    }
+  }, [areDetailsExpanded]);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -99,7 +100,7 @@ export const ClockScreen = () => {
           </FlexRow>
         </div>
 
-        {areDetailsExpanded && <TimeDetails ref={handleTimeDetailsRendered} className={styles.timeDetails} theme={timeOfTheDay} currentTime={currentTime} timeZone={timeZoneReadableName}/>}
+        {areDetailsExpanded && <TimeDetails ref={timeDetailsRef} className={styles.timeDetails} theme={timeOfTheDay} currentTime={currentTime} timeZone={timeZoneReadableName}/>}
       </div>
     </main>
   );

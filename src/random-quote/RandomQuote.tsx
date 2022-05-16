@@ -41,7 +41,7 @@ export const RandomQuote = ({className}: Props) => {
       </figure>
 
       <button aria-label="Reload quote" onClick={handleReloadButtonClick} className={styles.refreshButton}>
-        <RefreshIcon className={classNames(isLoading && styles.refreshIconSpinning)} />
+        <RefreshIcon aria-hidden="true" className={classNames(isLoading && styles.refreshIconSpinning)} />
       </button>
     </FlexRow>
   );
