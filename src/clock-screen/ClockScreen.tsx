@@ -5,7 +5,7 @@ import { FlexRow } from '../flex-row/FlexRow';
 import { CurrentTime } from '../current-time/CurrentTime';
 import { ExpandButton } from '../expand-button/ExpandButton';
 import { RandomQuote } from '../random-quote/RandomQuote';
-import { TimeDetails } from '../time-details/TimeDetails';
+import { TimeDetails, TimeDetailsRef } from '../time-details/TimeDetails';
 import { useClock } from './use-clock';
 import styles from './ClockScreen.module.css';
 import { getAddress, getAddressByIp } from '../firebase';
@@ -33,6 +33,12 @@ export const ClockScreen = () => {
       ...oldState,
       areDetailsExpanded: !oldState.areDetailsExpanded,
     }));
+  };
+
+  const handleTimeDetailsRendered = (ref: TimeDetailsRef | null) => {
+    if (ref != null) {
+      ref.focusContent();
+    }
   };
 
   useEffect(() => {
@@ -89,11 +95,11 @@ export const ClockScreen = () => {
           <FlexRow className={styles.timeRow}>
             <CurrentTime value={currentTime} country={country} city={city} timeOfTheDay={timeOfTheDay} />
 
-            <ExpandButton className={styles.expandButton} onClick={handleExpandButtonClick} isExpanded={areDetailsExpanded} />
+            <ExpandButton collapsedAriaLabel="Show details" expandedAriaLabel="Hide details" className={styles.expandButton} onClick={handleExpandButtonClick} isExpanded={areDetailsExpanded} />
           </FlexRow>
         </div>
 
-        {areDetailsExpanded && <TimeDetails className={styles.timeDetails} theme={timeOfTheDay} currentTime={currentTime} timeZone={timeZoneReadableName}/>}
+        {areDetailsExpanded && <TimeDetails ref={handleTimeDetailsRendered} className={styles.timeDetails} theme={timeOfTheDay} currentTime={currentTime} timeZone={timeZoneReadableName}/>}
       </div>
     </main>
   );

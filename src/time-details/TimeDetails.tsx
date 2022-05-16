@@ -1,3 +1,4 @@
+import { ForwardedRef, forwardRef, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
 import { getISOWeek, getDayOfYear } from 'date-fns';
 
@@ -11,17 +12,33 @@ type Props = {
   currentTime: Date;
 };
 
-export const TimeDetails = ({theme, className, timeZone, currentTime}: Props) => {
+export type TimeDetailsRef = {
+  focusContent: () => void;
+};
+
+const _TimeDetails = ({theme, className, timeZone, currentTime}: Props, forwardedRef: ForwardedRef<TimeDetailsRef>) => {
+  const dlRef = useRef<HTMLDListElement | null>(null);
+
   const themeToApply = theme || 'day';
 
   const dayOfTheWeekNumber = currentTime.getDay();
   const weekNumber = getISOWeek(currentTime);
   const dayOfTheYearNumber = getDayOfYear(currentTime);
 
+  useImperativeHandle(forwardedRef, () => {
+    return {
+      focusContent: () => {
+        if (dlRef.current) {
+          dlRef.current.focus();
+        }
+      }
+    }
+  });
+
   return (
     <section className={classNames(styles.root, themeToApply === 'night' && styles.rootNight, className)}>
       <FlexRow className={styles.row}>
-        <dl className={styles.fieldList}>
+        <dl ref={dlRef} aria-label="Time details" className={styles.fieldList} tabIndex={0}>
           <div className={styles.fieldsColumn}>
             <div className={styles.fieldDescription}>
               <dt className={classNames(styles.fieldName, 'fluidFontSize')}>Current timezone</dt>
@@ -50,3 +67,5 @@ export const TimeDetails = ({theme, className, timeZone, currentTime}: Props) =>
     </section>
   );
 };
+
+export const TimeDetails = forwardRef<TimeDetailsRef, Props>(_TimeDetails);

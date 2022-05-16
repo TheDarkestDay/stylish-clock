@@ -31,7 +31,7 @@ export const CurrentTime = ({value, timeOfTheDay, country, city}: Props) => {
   return (
     <section className={styles.currentTime}>
       <p className={classNames(styles.greeting, 'fluidFontSize')}>
-        <span className={styles.greetingIcon}>{greetingIcon}</span>{greetingText}, it's currently
+        <span aria-hidden="true" className={styles.greetingIcon}>{greetingIcon}</span>{greetingText}, it's currently
       </p>
 
       <div>

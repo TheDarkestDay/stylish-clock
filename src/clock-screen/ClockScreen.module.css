@@ -4,6 +4,10 @@
   flex-direction: column;
 
   background-image: url("../assets/desktop/bg-image-daytime.jpg");
+  background-image: image-set(
+    url("../assets/tablet/bg-image-daytime.jpg") 1x,
+    url("../assets/desktop/bg-image-daytime.jpg") 2x
+  );
   background-repeat: no-repeat, no-repeat;
   background-size: cover, cover;
   background-position: center, center;
@@ -13,6 +17,10 @@
 
 .mainNight {
   background-image: url("../assets/desktop/bg-image-nighttime.jpg");
+  background-image: image-set(
+    url("../assets/tablet/bg-image-nighttime.jpg") 1x,
+    url("../assets/desktop/bg-image-nighttime.jpg") 2x
+  );
 }
 
 .overlayContainer {
@@ -50,6 +58,20 @@
       3rem,
       6rem,
       calc(3rem + 2vw)
+    );
+  }
+
+  .main {
+    background-image: image-set(
+      url("../assets/mobile/bg-image-daytime.jpg") 1x,
+      url("../assets/tablet/bg-image-daytime.jpg") 2x,
+    );
+  }
+
+  .mainNight {
+    background-image: image-set(
+      url("../assets/mobile/bg-image-nighttime.jpg") 1x,
+      url("../assets/tablet/bg-image-nighttime.jpg") 2x
     );
   }
 }
