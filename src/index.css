@@ -22,3 +22,7 @@ figure, blockquote, dd, dl {
 html, body, #root {
   height: 100%;
 }
+
+#root {
+  --slide-transition: transform 0.3s ease-in-out;
+}

@@ -1,0 +1,13 @@
+.root {
+  position: fixed;
+  top: 100%;
+
+  width: 100%;
+
+  transform: translateY(0);
+  transition: var(--slide-transition);
+}
+
+.rootOpen {
+  transform: translateY(-100%);
+}

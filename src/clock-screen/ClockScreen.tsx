@@ -9,12 +9,14 @@ import { TimeDetails, TimeDetailsRef } from '../time-details/TimeDetails';
 import { useClock } from './use-clock';
 import styles from './ClockScreen.module.css';
 import { getAddress, getAddressByIp } from '../firebase';
+import { SlidePanel, SlidePanelRef } from '../slide-panel/SlidePanel';
 
 type State = {
   areDetailsExpanded: boolean;
   city?: string;
   country?: string;
   timeOfTheDay: 'day' | 'night';
+  timeRowSlideStyle?: React.CSSProperties;
 };
 
 const timeZoneReadableName = new Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -26,8 +28,9 @@ export const ClockScreen = () => {
   });
   const currentTime = useClock();
   const timeDetailsRef = useRef<TimeDetailsRef | null>(null);
+  const timeDetailsPanelRef = useRef<SlidePanelRef | null>(null);
 
-  const { areDetailsExpanded, timeOfTheDay, country, city } = state;
+  const { areDetailsExpanded, timeOfTheDay, country, city, timeRowSlideStyle } = state;
 
   const handleExpandButtonClick = () => {
     setState((oldState) => ({
@@ -50,10 +53,29 @@ export const ClockScreen = () => {
   }, [currentTime, timeOfTheDay, setState]);
 
   useEffect(() => {
+    const timeDetailsElement = timeDetailsRef.current;
+    const timeDetailsPanelElement = timeDetailsPanelRef.current;
+
     if (areDetailsExpanded) {
-      timeDetailsRef.current?.focusContent();
+      timeDetailsElement?.focusContent();
+      
+      if (timeDetailsPanelElement !== null) {
+        setState((oldState) => ({
+          ...oldState,
+          timeRowSlideStyle: {
+            transform: `translateY(-${timeDetailsPanelElement.getContentHeight()}px)`,
+          },
+        }));
+      }
+    } else {
+      setState((oldState) => ({
+        ...oldState,
+        timeRowSlideStyle: {
+          transform: 'translateY(0)',
+        },
+      }));
     }
-  }, [areDetailsExpanded]);
+  }, [areDetailsExpanded, setState]);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -93,14 +115,16 @@ export const ClockScreen = () => {
         <div className={styles.timeScreen}>
           <RandomQuote className={classNames(areDetailsExpanded && styles.hidden)}/>
           
-          <FlexRow className={styles.timeRow}>
+          <FlexRow style={timeRowSlideStyle} className={classNames(styles.timeRow)}>
             <CurrentTime value={currentTime} country={country} city={city} timeOfTheDay={timeOfTheDay} />
 
             <ExpandButton collapsedAriaLabel="Show details" expandedAriaLabel="Hide details" className={styles.expandButton} onClick={handleExpandButtonClick} isExpanded={areDetailsExpanded} />
           </FlexRow>
         </div>
 
-        {areDetailsExpanded && <TimeDetails ref={timeDetailsRef} className={styles.timeDetails} theme={timeOfTheDay} currentTime={currentTime} timeZone={timeZoneReadableName}/>}
+        <SlidePanel ref={timeDetailsPanelRef} open={areDetailsExpanded}>
+          <TimeDetails ref={timeDetailsRef} className={styles.timeDetails} theme={timeOfTheDay} currentTime={currentTime} timeZone={timeZoneReadableName}/>
+        </SlidePanel>
       </div>
     </main>
   );

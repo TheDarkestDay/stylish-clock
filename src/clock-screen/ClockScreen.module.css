@@ -33,6 +33,9 @@
 
 .timeRow {
   margin-top: auto;
+  
+  transform: translateY(0);
+  transition: var(--slide-transition);
 }
 
 .timeScreen {
