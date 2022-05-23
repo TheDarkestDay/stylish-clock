@@ -1,5 +1,8 @@
 .currentTime {
   color: white;
+
+  transform-origin: bottom left;
+  transition: var(--slide-transition);
 }
 
 .timeValue {

@@ -1,3 +1,4 @@
+import { ForwardedRef, forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { ReactComponent as MoonIcon } from '../assets/desktop/icon-moon.svg';
@@ -6,6 +7,7 @@ import styles from './CurrentTime.module.css';
 
 type Props = {
   value: Date;
+  timeScale: number;
   country?: string;
   city?: string;
   timeOfTheDay: 'day' | 'night';
@@ -18,7 +20,7 @@ const timeFormat = new Intl.DateTimeFormat([], {
   hourCycle: 'h24',
 });
 
-export const CurrentTime = ({value, timeOfTheDay, country, city}: Props) => {
+const _CurrentTime = ({value, timeOfTheDay, country, city, timeScale}: Props, ref: ForwardedRef<HTMLDivElement | null>) => {
   const formattedTime = timeFormat.format(value);
   const [time, timeZone] = formattedTime.split(' ');
   const [hours, minutes] = time.split(':');
@@ -29,7 +31,7 @@ export const CurrentTime = ({value, timeOfTheDay, country, city}: Props) => {
   const locationContent = country && city ? `in ${city}, ${country}` : 'in your location';
 
   return (
-    <section className={styles.currentTime}>
+    <section ref={ref} style={{transform: `scale(${timeScale})`}} className={styles.currentTime}>
       <p className={classNames(styles.greeting, 'fluidFontSize')}>
         <span aria-hidden="true" className={styles.greetingIcon}>{greetingIcon}</span>{greetingText}, it's currently
       </p>
@@ -44,3 +46,5 @@ export const CurrentTime = ({value, timeOfTheDay, country, city}: Props) => {
     </section>
   );
 };
+
+export const CurrentTime = forwardRef(_CurrentTime);
