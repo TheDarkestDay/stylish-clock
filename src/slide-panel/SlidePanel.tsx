@@ -1,6 +1,7 @@
-import { ForwardedRef, forwardRef, useRef, useImperativeHandle } from 'react';
+import { ForwardedRef, forwardRef, useRef, useImperativeHandle, useEffect, useContext } from 'react';
 import classNames from 'classnames';
 
+import { SlideContext } from './slide-context';
 import styles from './SlidePanel.module.css';
 
 type Props = {
@@ -20,6 +21,16 @@ const _SlidePanel = ({children, open}: Props, forwardedRef: ForwardedRef<SlidePa
       getContentHeight: () => rootRef.current?.clientHeight || 0,
     }
   });
+
+  const {onSlideUp, onSlideDown} = useContext(SlideContext);
+
+  useEffect(() => {
+    if (open) {
+      onSlideUp(rootRef.current?.clientHeight || 0);
+    } else {
+      onSlideDown();
+    }
+  }, [open, onSlideUp, onSlideDown]);
 
   return (
     <div ref={rootRef} className={classNames(styles.root, open && styles.rootOpen)}>

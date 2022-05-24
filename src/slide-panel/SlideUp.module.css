@@ -1,0 +1,4 @@
+.slideUp {
+  transform: translateY(0);
+  transition: var(--slide-transition);
+}

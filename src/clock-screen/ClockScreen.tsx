@@ -9,7 +9,7 @@ import { TimeDetails, TimeDetailsRef } from '../time-details/TimeDetails';
 import { useClock } from './use-clock';
 import styles from './ClockScreen.module.css';
 import { getAddress, getAddressByIp } from '../firebase';
-import { SlidePanel, SlidePanelRef } from '../slide-panel/SlidePanel';
+import { SlideProvider, SlidePanel, SlidePanelRef, SlideUp  } from '../slide-panel';
 
 type State = {
   areDetailsExpanded: boolean;
@@ -17,7 +17,6 @@ type State = {
   country?: string;
   timeScale: number;
   timeOfTheDay: 'day' | 'night';
-  timeRowSlideStyle?: React.CSSProperties;
 };
 
 const timeZoneReadableName = new Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -34,7 +33,7 @@ export const ClockScreen = () => {
   const timeDetailsPanelRef = useRef<SlidePanelRef | null>(null);
   const currentTimeRef = useRef<HTMLDivElement | null>(null);
 
-  const { areDetailsExpanded, timeOfTheDay, country, city, timeRowSlideStyle, timeScale } = state;
+  const { areDetailsExpanded, timeOfTheDay, country, city, timeScale } = state;
 
   const handleExpandButtonClick = () => {
     setState((oldState) => ({
@@ -85,18 +84,12 @@ export const ClockScreen = () => {
 
         setState((oldState) => ({
           ...oldState,
-          timeRowSlideStyle: {
-            transform: `translateY(-${slidePanelHeight}px)`,
-          },
           timeScale: newTimeScale,
         }));
       }
     } else {
       setState((oldState) => ({
         ...oldState,
-        timeRowSlideStyle: {
-          transform: 'translateY(0)',
-        },
         timeScale: 1,
       }));
     }
@@ -136,21 +129,23 @@ export const ClockScreen = () => {
 
   return (
     <main className={classNames(styles.main, timeOfTheDay === 'night' && styles.mainNight)}>
-      <div className={styles.overlayContainer}>
+      <SlideProvider className={styles.overlayContainer}>
         <div ref={paddingContainerRef} className={styles.timeScreen}>
           <RandomQuote className={classNames(areDetailsExpanded && styles.hidden)}/>
-          
-          <FlexRow style={timeRowSlideStyle} className={classNames(styles.timeRow)}>
-            <CurrentTime ref={currentTimeRef} timeScale={timeScale} value={currentTime} country={country} city={city} timeOfTheDay={timeOfTheDay} />
 
-            <ExpandButton collapsedAriaLabel="Show details" expandedAriaLabel="Hide details" className={styles.expandButton} onClick={handleExpandButtonClick} isExpanded={areDetailsExpanded} />
-          </FlexRow>
+          <SlideUp className={styles.timeSlideContainer}>
+            <FlexRow className={classNames(styles.timeRow)}>
+              <CurrentTime ref={currentTimeRef} timeScale={timeScale} value={currentTime} country={country} city={city} timeOfTheDay={timeOfTheDay} />
+
+              <ExpandButton collapsedAriaLabel="Show details" expandedAriaLabel="Hide details" className={styles.expandButton} onClick={handleExpandButtonClick} isExpanded={areDetailsExpanded} />
+            </FlexRow>
+          </SlideUp>
         </div>
 
         <SlidePanel ref={timeDetailsPanelRef} open={areDetailsExpanded}>
           <TimeDetails ref={timeDetailsRef} className={styles.timeDetails} theme={timeOfTheDay} currentTime={currentTime} timeZone={timeZoneReadableName}/>
         </SlidePanel>
-      </div>
+      </SlideProvider>
     </main>
   );
 };
