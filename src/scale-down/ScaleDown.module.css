@@ -1,0 +1,5 @@
+.scaleDown {
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: var(--slide-transition);
+}
