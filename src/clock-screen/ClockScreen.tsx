@@ -10,10 +10,11 @@ import { useClock } from './use-clock';
 import styles from './ClockScreen.module.css';
 import { getAddress, getAddressByIp } from '../firebase';
 import { ScalableFrame, ScaleDown } from '../scale-down';
-import { SlideProvider, SlidePanel, SlideUp  } from '../slide-panel';
+import { SlideProvider, SlidePanel, SlideUp, SlideDirection  } from '../slide-panel';
 
 type State = {
   areDetailsExpanded: boolean;
+  canShowRandomQuote: boolean;
   city?: string;
   country?: string;
   timeOfTheDay: 'day' | 'night';
@@ -24,18 +25,26 @@ const timeZoneReadableName = new Intl.DateTimeFormat().resolvedOptions().timeZon
 export const ClockScreen = () => {
   const [state, setState] = useState<State>({
     areDetailsExpanded: false,
+    canShowRandomQuote: true,
     timeOfTheDay: 'day',
   });
   const currentTime = useClock();
   const timeDetailsRef = useRef<TimeDetailsRef | null>(null);
 
-  const { areDetailsExpanded, timeOfTheDay, country, city } = state;
+  const { areDetailsExpanded, timeOfTheDay, country, city, canShowRandomQuote } = state;
 
   const handleExpandButtonClick = () => {
     setState((oldState) => ({
       ...oldState,
       areDetailsExpanded: !oldState.areDetailsExpanded,
+      canShowRandomQuote: false,
     }));
+  };
+
+  const handleSlideEnd = (direction: SlideDirection) => {
+    if (direction === 'down') {
+      setState((oldState) => ({...oldState, canShowRandomQuote: true}));
+    }
   };
 
   useEffect(() => {
@@ -95,9 +104,9 @@ export const ClockScreen = () => {
     <main className={classNames(styles.main, timeOfTheDay === 'night' && styles.mainNight)}>
       <SlideProvider className={styles.overlayContainer}>
         <ScalableFrame className={styles.timeScreen}>
-          <RandomQuote className={classNames(areDetailsExpanded && styles.hidden)}/>
+          <RandomQuote className={classNames(!canShowRandomQuote && styles.hidden)}/>
 
-          <SlideUp className={styles.timeSlideContainer}>
+          <SlideUp onSlideEnd={handleSlideEnd} className={styles.timeSlideContainer}>
             <FlexRow className={classNames(styles.timeRow)}>
               <ScaleDown>
                 <CurrentTime value={currentTime} country={country} city={city} timeOfTheDay={timeOfTheDay} />
