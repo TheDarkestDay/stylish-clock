@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Stylish Clock
+
+My solution for [Clock app](https://www.frontendmentor.io/challenges/clock-app-LMFaxFwrM) challenge from [frontendmentor.io](https://www.frontendmentor.io/);
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
