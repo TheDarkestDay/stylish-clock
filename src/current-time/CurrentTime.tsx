@@ -16,7 +16,7 @@ const timeFormat = new Intl.DateTimeFormat([], {
   hour: 'numeric',
   minute: '2-digit',
   timeZoneName: 'short',
-  hourCycle: 'h24',
+  hourCycle: 'h23',
 });
 
 const _CurrentTime = ({value, timeOfTheDay, country, city}: Props, ref: ForwardedRef<HTMLDivElement | null>) => {
